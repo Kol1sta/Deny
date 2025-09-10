@@ -2,6 +2,7 @@ import { Message, EmbedBuilder, StringSelectMenuBuilder, StringSelectMenuOptionB
 import { CommandItem } from "../services/commands";
 import Client from "../services/client";
 
+// @ts-ignore
 export default new CommandItem({ name: 'help' }, async (msg: Message, args, client: Client) => {
     const embed = new EmbedBuilder()
         .setTitle("Команды")
