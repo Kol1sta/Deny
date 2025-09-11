@@ -41,7 +41,10 @@ export default new EventItem(options, async (interaction: Interaction) => {
                     .setTitle("**🥝 Взаимодействия**")
                     .setDescription(`\`${process.env.PREFIX}punch\`: ударить участника
 \`${process.env.PREFIX}hug\`: обнять участника
-\`${process.env.PREFIX}kiss\`: поцеловать участника`)
+\`${process.env.PREFIX}kiss\`: поцеловать участника
+\`${process.env.PREFIX}cry\`: заплакать
+\`${process.env.PREFIX}lick\`: облизать участника
+\`${process.env.PREFIX}wave\`: помахать участнику`)
                     .setColor(0xFFF4D8)
 
                 await interaction.reply({ embeds: [embed3], ephemeral: true });
