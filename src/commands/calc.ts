@@ -42,6 +42,7 @@ export default new CommandItem({
                 await msg.reply("На ноль делить нельзя!");
                 return;
             }
+            
             result = num1 / num2;
             break;
         default:
