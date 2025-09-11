@@ -1,5 +1,6 @@
 import { GuildMember, EmbedBuilder } from 'discord.js';
 import { EventItem, EventItemOptions } from '../services/events';
+import { JOIN_CHANNEL_ID } from "../../config.json";
 
 const options: EventItemOptions = {
     isOnce: false,
@@ -8,7 +9,7 @@ const options: EventItemOptions = {
 
 export default new EventItem(options, async (member: GuildMember) => {
     try {
-        const channel = await member.guild.channels.fetch(process.env.JOIN_CHANNEL_ID!);
+        const channel = await member.guild.channels.fetch(JOIN_CHANNEL_ID!);
 
         if(!channel || !channel.isTextBased()) {
             console.error('Канал не найден или не текстовый');
