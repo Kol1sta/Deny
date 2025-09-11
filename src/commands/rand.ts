@@ -1,9 +1,6 @@
 import { Message } from "discord.js";
 import { CommandItem } from "../services/commands";
-
-function getRandomInt(min: number, max: number): number {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+import getRandomInt from "../utils/get-random-int";
 
 export default new CommandItem({ name: 'rand' }, async (msg: Message, args) => {
     if(args.length < 2) {

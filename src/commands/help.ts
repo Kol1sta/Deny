@@ -15,7 +15,7 @@ export default new CommandItem({ name: 'help' }, async (msg: Message, args, clie
 \`${process.env.PREFIX}ban\`, \`${process.env.PREFIX}kick\`, \`${process.env.PREFIX}unban\`, \`${process.env.PREFIX}clear\`
 
 🥝﹕**Взаимодействия**﹔₊˚✦
-\`${process.env.PREFIX}punch\`, \`${process.env.PREFIX}hug\`, \`${process.env.PREFIX}kiss\`
+\`${process.env.PREFIX}punch\`, \`${process.env.PREFIX}hug\`, \`${process.env.PREFIX}kiss\`, \`${process.env.PREFIX}cry\`, \`${process.env.PREFIX}lick\`, \`${process.env.PREFIX}wave\`
 
 🍵﹕**Утилиты**﹔₊˚✦
 \`${process.env.PREFIX}avatar\`, \`${process.env.PREFIX}rand\`, \`${process.env.PREFIX}calc\``)
