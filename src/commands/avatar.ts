@@ -8,6 +8,7 @@ export default new CommandItem({ name: 'avatar' }, async (msg: Message) => {
     const embed = new EmbedBuilder()
         .setTitle(`Аватар ${user.displayName}`)
         .setImage(user.avatarURL({ size: 2048 }))
+        .setColor(0xFFF4D8)
         .setFooter({ text: `Запрошено ${msg.author.tag}`, iconURL: msg.author.avatarURL() || undefined })
         .setTimestamp()
     
