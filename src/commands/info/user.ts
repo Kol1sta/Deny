@@ -1,5 +1,5 @@
 import { Message, EmbedBuilder } from "discord.js";
-import { CommandItem } from "../services/commands";
+import { CommandItem } from "../../services/commands";
 
 export default new CommandItem({ name: 'user' }, async (msg: Message) => {
     let user = msg.mentions.users.first();

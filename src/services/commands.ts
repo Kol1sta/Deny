@@ -21,6 +21,12 @@ export class CommandItem {
         this.slash = new SlashCommandBuilder()
             .setName(this.options.name)
             .setDescription(this.options.desc || 'Bot command');
+
+    }
+
+    // Геттер для получения JSON-представления команды
+    public get data() {
+        return this.slash.toJSON();
     }
 }
 
