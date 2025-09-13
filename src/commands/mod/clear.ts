@@ -1,30 +1,22 @@
 // q.clear X  
 
 import { Message, ChannelType } from 'discord.js';
-import { CommandItem } from '../services/commands';
+import { CommandItem } from '../../services/commands';
 
 export default new CommandItem({
     name: 'clear',
     desc: 'Очищает указанное количество сообщений',
-}, async (msg: Message) => {
+}, async (msg: Message, args: string[]) => {
     if (!msg.guild) {
         await msg.reply('Эта команда работает только на серверах!');
         return;
-    }
-    
-    if (msg.channel.type !== ChannelType.GuildText) {
+    } else if (msg.channel.type !== ChannelType.GuildText) {
         await msg.reply('Эта команда работает только в текстовых каналах сервера!');
         return;
-    }
-
-    if (!msg.member?.permissions.has('ManageMessages')) {
+    } else if (!msg.member?.permissions.has('ManageMessages')) {
         await msg.reply('У вас нет прав!');
         return;
-    }
-
-    const args = msg.content.split(' ').slice(1);
-    
-    if (args.length === 0) {
+    } else if (args.length === 0) {
         await msg.reply('Укажите количество сообщений для очистки!');
         return;
     }
