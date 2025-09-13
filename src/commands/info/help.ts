@@ -1,6 +1,6 @@
 import { Message, EmbedBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } from "discord.js";
-import { CommandItem } from "../services/commands";
-import Client from "../services/client";
+import { CommandItem } from "../../services/commands";
+import Client from "../../services/client";
 
 // @ts-ignore
 export default new CommandItem({ name: 'help' }, async (msg: Message, args, client: Client) => {

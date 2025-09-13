@@ -1,5 +1,5 @@
 import { Message } from 'discord.js';
-import { CommandItem } from '../services/commands';
+import { CommandItem } from '../../services/commands';
 
 export default new CommandItem({ 
     name: 'calc'
