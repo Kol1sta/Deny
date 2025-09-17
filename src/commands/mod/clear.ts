@@ -1,4 +1,4 @@
-// q.clear X  
+// q.clear X
 
 import { Message, ChannelType } from 'discord.js';
 import { CommandItem } from '../../services/commands';
@@ -32,7 +32,7 @@ export default new CommandItem({
     try {
         // Получаем сообщения для удаления (включая исходное сообщение)
         const messages = await msg.channel.messages.fetch({ limit: amount + 1 });
-        
+
         // Фильтруем сообщения, которые можно удалить (не старше 14 дней)
         // Исключаем исходное сообщение команды из удаления
         const deletableMessages = messages.filter(message => {
@@ -41,7 +41,7 @@ export default new CommandItem({
         });
 
         let deletedCount = 0;
-        
+
         // Удаляем сообщения
         if (deletableMessages.size > 0) {
             await msg.channel.bulkDelete(deletableMessages);
@@ -49,7 +49,7 @@ export default new CommandItem({
         }
 
         const reply = await msg.reply(`Удалено ${deletedCount} сообщений!`);
-        
+
         // Удаляем сообщение с ответом через 5 секунд
         setTimeout(async () => {
             try {
@@ -58,7 +58,7 @@ export default new CommandItem({
                 console.error('Ошибка при удалении сообщения:', error);
             }
         }, 5000);
-        
+
     } catch (error) {
         console.error('Ошибка при очистке сообщений:', error);
         await msg.reply('Произошла ошибка при очистке сообщений!');

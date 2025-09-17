@@ -1,9 +1,6 @@
-import { Message } from 'discord.js';
+import { Message, CommandInteraction } from 'discord.js';
 import { CommandItem } from '../../services/commands';
 
-export default new CommandItem({
-    name: 'ping',
-    desc: 'test cmd'
-}, async (msg: Message) => {
+export default new CommandItem({ name: 'ping' }, async (msg: Message | CommandInteraction) => {
     msg.reply('Pong!');
 });

@@ -8,8 +8,8 @@ const options:EventItemOptions = {
     name: 'ready'
 }
 
-export default new EventItem(options, (client:Client) => {
+export default new EventItem(options, (client: Client) => {
     console.log(`Bot was started at ${client.user?.tag}`);
-    client.user?.setPresence({ status: "idle" }); 
+    client.user?.setPresence({ status: "idle" });
     client.user?.setActivity(`${process.env.PREFIX}help`, { type: ActivityType.Listening });
 });

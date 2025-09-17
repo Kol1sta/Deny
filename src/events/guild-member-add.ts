@@ -18,7 +18,7 @@ export default new EventItem(options, async (member: GuildMember) => {
 
         const embed = new EmbedBuilder()
             .setTitle('Добро пожаловать ₊˚✦')
-            .setDescription(`- <@${member.id}>, Добро пожаловать на ${member.guild.name}              
+            .setDescription(`- <@${member.id}>, Добро пожаловать на ${member.guild.name}
 - Обязательно прочитайте <#1410389079240999014> и <#1410389051197886575>
 - Приятного общения`)
             .setColor(0xFFF4D8)

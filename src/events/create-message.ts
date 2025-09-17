@@ -8,14 +8,14 @@ const options:EventItemOptions = {
     name: 'messageCreate'
 }
 
-export default new EventItem(options, async (msg:Message, client:Client) => {
+export default new EventItem(options, async (msg: Message, client: Client) => {
     if(msg.author.bot) return;
 
-    const prefix:string = process.env.PREFIX as string;
+    const prefix: string = process.env.PREFIX as string;
     if(!msg.content.startsWith(prefix)) return;
 
-    const args:Array<string> = msg.content.slice((prefix).length).trim().split(/ +/); 
-    const cname:string = <string>args.shift()?.toLowerCase(); 
+    const args: Array<string> = msg.content.slice((prefix).length).trim().split(/ +/);
+    const cname: string = <string>args.shift()?.toLowerCase();
 
     if(!cname || !client) return;
     else if(!client?.getCommandByName(cname)) return;
