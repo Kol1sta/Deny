@@ -2,13 +2,32 @@
 
 import { Interaction, EmbedBuilder } from "discord.js";
 import { EventItemOptions, EventItem } from "../services/events";
+import Client from "../services/client";
 
 const options: EventItemOptions = {
     isOnce: false,
     name: 'interactionCreate'
 }
 
-export default new EventItem(options, async (interaction: Interaction) => {
+// @ts-ignore
+export default new EventItem(options, async (interaction: Interaction, client: Client) => {
+    // if(interaction.isChatInputCommand()) {
+    //     const command = client.getCommandByName(interaction.commandName);
+
+    //     if(!command) {
+    //         await interaction.reply("Command handler not found");
+    //         return;
+    //     }
+
+    //     try {
+    //         await command.execute(interaction);
+    //     } catch(e) {
+    //         await interaction.reply("Error at server side");
+    //         console.log(e);
+    //         return;
+    //     }
+    // }
+
     if(!interaction.isStringSelectMenu()) return;
 
     if(interaction.customId === "help-cmd") {

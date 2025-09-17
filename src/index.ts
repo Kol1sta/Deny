@@ -5,8 +5,12 @@ import { Events } from './services/events';
 import { Commands } from './services/commands';
 import './utils/load-env';
 
-const client:Client = new Client();
-new Events(path.join(__dirname, 'events'), client);
-new Commands(path.join(__dirname, 'commands'), client);
+async function main() {
+    const client: Client = new Client();
+    new Events(path.join(__dirname, 'events'), client);
 
-client.login(process.env.TOKEN);
+    await client.login(process.env.TOKEN);
+    new Commands(path.join(__dirname, 'commands'), client);
+}
+
+main().catch(console.error);

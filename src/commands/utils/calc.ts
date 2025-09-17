@@ -1,7 +1,7 @@
 import { Message } from 'discord.js';
 import { CommandItem } from '../../services/commands';
 
-export default new CommandItem({ 
+export default new CommandItem({
     name: 'calc'
 }, async (msg: Message, args: string[]) => {
     if (args.length !== 3) {
@@ -24,7 +24,7 @@ export default new CommandItem({
     }
 
     let result: number;
-    
+
     switch(operation) {
         case '+':
             result = num1 + num2;
@@ -42,7 +42,7 @@ export default new CommandItem({
                 await msg.reply("На ноль делить нельзя!");
                 return;
             }
-            
+
             result = num1 / num2;
             break;
         default:
@@ -51,6 +51,6 @@ export default new CommandItem({
     }
 
     const formattedResult = Number.isInteger(result) ? result : parseFloat(result.toFixed(4));
-    
+
     await msg.reply(`**${num1} ${operation} ${num2} = ${formattedResult}**`);
 });

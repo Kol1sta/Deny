@@ -4,14 +4,14 @@ import getActionFromTag from '../../utils/get-action';
 
 export default new CommandItem({ name: 'hug' }, async (msg: Message) => {
     let user = msg.mentions.users.first();
-    if(!user) { 
-        await msg.reply({ content: 'Укажите пользователя!' }); 
+    if(!user) {
+        await msg.reply({ content: 'Укажите пользователя!' });
         return;
     }
 
-    await getActionFromTag({ 
-        msg: msg, 
-        tag: 'hug', 
-        title: `Участник ${msg.author.displayName} обнял ${user?.username}` 
+    await getActionFromTag({
+        msg: msg,
+        tag: 'hug',
+        title: `Участник ${msg.author.displayName} обнял ${user?.username}`
     });
 });
