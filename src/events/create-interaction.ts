@@ -1,6 +1,6 @@
 // МОЛЮ НЕ ТРОГАЙТЕ ЭТО 🙏🙏
 
-import { Interaction, EmbedBuilder } from "discord.js";
+import { Interaction, EmbedBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, InteractionType } from "discord.js";
 import { EventItemOptions, EventItem } from "../services/events";
 import Client from "../services/client";
 
@@ -27,6 +27,85 @@ export default new EventItem(options, async (interaction: Interaction, client: C
     //         return;
     //     }
     // }
+
+    if(interaction.isButton()) {
+        if(interaction.customId === "staff-form") {
+            const modalWindow = new ModalBuilder()
+                .setCustomId("staff-form-modal")
+                .setTitle("Анкета")
+
+            const roleInput = new TextInputBuilder()
+                .setCustomId("staff-role")
+                .setLabel("На кого вы хотите подать?")
+                .setPlaceholder("Хелпер/Пиар Менеджер")
+                .setStyle(TextInputStyle.Short)
+                .setRequired(true);
+
+            const experienceInput = new TextInputBuilder()
+                .setCustomId("staff-experience")
+                .setLabel("Ваш опыт на этой роли")
+                .setStyle(TextInputStyle.Paragraph)
+                .setRequired(true);
+
+            const characterInput = new TextInputBuilder()
+                .setCustomId("staff-character")
+                .setLabel("Опишите себя")
+                .setPlaceholder("В основном характер, буквально пара предложений")
+                .setStyle(TextInputStyle.Paragraph)
+                .setRequired(true);
+
+            const actionRow1 = new ActionRowBuilder<TextInputBuilder>().addComponents(roleInput);
+            const actionRow2 = new ActionRowBuilder<TextInputBuilder>().addComponents(experienceInput);
+            const actionRow3 = new ActionRowBuilder<TextInputBuilder>().addComponents(characterInput);
+
+            modalWindow.addComponents(actionRow1, actionRow2, actionRow3);
+
+            await interaction.showModal(modalWindow);
+        }
+    }
+
+    if(interaction.type === InteractionType.ModalSubmit) {
+        if(interaction.customId === "staff-form-modal") {
+            const member = await interaction.guild?.members.fetch(interaction.user.id);
+            if(member?.isCommunicationDisabled() || member?.roles.cache.find(role => role.id == process.env.MUTE_ROLE_ID)) return;
+
+            await interaction.deferReply({ ephemeral: true });
+
+            const role = interaction.fields.getTextInputValue('staff-role');
+            const experience = interaction.fields.getTextInputValue('staff-experience');
+            const character = interaction.fields.getTextInputValue('staff-character');
+
+            const channel = interaction.guild?.channels.cache.find(ch => ch.id === process.env.STAFF_CHANNEL_ID && ch.isTextBased());
+
+            if(channel && channel.isTextBased()) {
+                const embed = new EmbedBuilder()
+                    .setTitle("Новая заявка ₊˚✦                                       ₊")
+                    .setDescription(`🌺﹕**Роль**﹔₊˚✦
+\`\`\`
+${role}
+\`\`\`
+
+💮﹕**Опыт**﹔₊˚✦:
+\`\`\`
+${experience}
+\`\`\`
+
+🍵﹕**О себе**﹔₊˚✦
+\`\`\`
+${character}
+\`\`\`
+`)
+                    .setFooter({ text: `Отправлено ${interaction.user.tag}`, iconURL: interaction.user.avatarURL() || undefined })
+                    .setTimestamp()
+                    .setThumbnail(interaction.user.avatarURL())
+                    .setColor(0xFFF4D8)
+
+                await channel.send({ content: `||<@${process.env.OWNER_ID}>||`, embeds: [embed] });
+            }
+
+            interaction.editReply({ content: "Заявка отправлена!" });
+        }
+    }
 
     if(!interaction.isStringSelectMenu()) return;
 

@@ -8,10 +8,6 @@
         "source.fixAll": "always"
     },
 
-    "[rust]": {
-
-    },
-
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
     "files.eol": "\n"
