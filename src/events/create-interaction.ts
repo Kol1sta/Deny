@@ -3,6 +3,7 @@
 import { Interaction, EmbedBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder, InteractionType } from "discord.js";
 import { EventItemOptions, EventItem } from "../services/events";
 import Client from "../services/client";
+import { MUTE_ROLE_ID, OWNER_ID, STAFF_CHANNEL_ID } from "../../config.json";
 
 const options: EventItemOptions = {
     isOnce: false,
@@ -67,7 +68,10 @@ export default new EventItem(options, async (interaction: Interaction, client: C
     if(interaction.type === InteractionType.ModalSubmit) {
         if(interaction.customId === "staff-form-modal") {
             const member = await interaction.guild?.members.fetch(interaction.user.id);
-            if(member?.isCommunicationDisabled() || member?.roles.cache.find(role => role.id == process.env.MUTE_ROLE_ID)) return;
+            if(member?.isCommunicationDisabled() || member?.roles.cache.find(role => role.id == MUTE_ROLE_ID)) {
+                await interaction.reply({ ephemeral: true, content: "Не удалось отправить заявку" });
+                return;
+            }
 
             await interaction.deferReply({ ephemeral: true });
 
@@ -75,7 +79,7 @@ export default new EventItem(options, async (interaction: Interaction, client: C
             const experience = interaction.fields.getTextInputValue('staff-experience');
             const character = interaction.fields.getTextInputValue('staff-character');
 
-            const channel = interaction.guild?.channels.cache.find(ch => ch.id === process.env.STAFF_CHANNEL_ID && ch.isTextBased());
+            const channel = interaction.guild?.channels.cache.find(ch => ch.id === STAFF_CHANNEL_ID && ch.isTextBased());
 
             if(channel && channel.isTextBased()) {
                 const embed = new EmbedBuilder()
@@ -100,7 +104,7 @@ ${character}
                     .setThumbnail(interaction.user.avatarURL())
                     .setColor(0xFFF4D8)
 
-                await channel.send({ content: `||<@${process.env.OWNER_ID}>||`, embeds: [embed] });
+                await channel.send({ content: `||<@${OWNER_ID}>||`, embeds: [embed] });
             }
 
             interaction.editReply({ content: "Заявка отправлена!" });
