@@ -1,6 +1,6 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
-import { SlashCommandBuilder, Routes } from 'discord.js';
+import { Routes } from 'discord.js';
 import { REST } from '@discordjs/rest';
 
 import Client from './client';
@@ -13,15 +13,15 @@ export interface CommandItemOptions {
 export class CommandItem {
     public readonly options: CommandItemOptions;
     public readonly execute: (...args: any[]) => Promise<void> | void;
-    public readonly slash: SlashCommandBuilder;
+    // public readonly slash: SlashCommandBuilder;
 
     constructor(options: CommandItemOptions, execute: (...args: any[]) => Promise<void> | void) {
         this.options = options;
         this.execute = execute;
 
-        this.slash = new SlashCommandBuilder()
-            .setName(this.options.name)
-            .setDescription(this.options.desc || 'Bot command');
+        // this.slash = new SlashCommandBuilder()
+        //     .setName(this.options.name)
+        //     .setDescription(this.options.desc || 'Bot command');
     }
 }
 
@@ -41,7 +41,7 @@ export class Commands {
     public async loadCommands() {
         const files = (await fs.readdir(this.path, { recursive: true })).filter((file) => file.endsWith('.ts') || file.endsWith('.js'));
 
-        const commands = [];
+        // const commands = [];
 
         try {
             for(const file of files) {
@@ -58,7 +58,7 @@ export class Commands {
                     execute: command.execute
                 });
 
-                commands.push(command.slash.toJSON());
+                // commands.push(command.slash.toJSON());
             }
 
             // TODO: register slash commands later
