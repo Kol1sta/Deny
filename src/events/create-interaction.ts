@@ -328,12 +328,4 @@ ${character}
                 break;
         }
     }
-
-    async function newFunction(guildChannel: any) {
-        const ticketCreatorUsername = guildChannel.name.replace('ticket-', '').replace('closed-', '');
-        const members = await interaction.guild?.members.fetch();
-        const ticketCreator = members?.find(member => member.user.username === ticketCreatorUsername
-        );
-        return ticketCreator;
-    }
 });
